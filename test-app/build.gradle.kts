@@ -81,6 +81,10 @@ dependencies {
     // Only required if you want to support PDF files using PDFium.
     implementation(project(":readium:adapters:pdfium"))
 
+    // retrofit
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.browser)

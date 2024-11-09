@@ -7,6 +7,7 @@
 package org.readium.r2.testapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -19,16 +20,30 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
+import org.readium.r2.testapp.helpers.APIDataItem
+import org.readium.r2.testapp.helpers.APIInterface
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
+const val BASE_URL = "https://jsonplaceholder.typicode.com/"
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     private val viewModel: MainViewModel by viewModels()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        // API calling test
+        getAPIData()
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.container)) { v, insets ->
             val statusBars = insets.getInsets(WindowInsetsCompat.Type.statusBars())
             v.setPadding(statusBars.left, statusBars.top, statusBars.right, statusBars.bottom)
@@ -51,6 +66,31 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         viewModel.channel.receive(this) { handleEvent(it) }
+    }
+
+    private fun getAPIData() {
+        val retorfitBuilder = Retrofit.Builder()
+                            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(BASE_URL)
+            .build()
+            .create(APIInterface::class.java)
+
+        val retorfitData = retorfitBuilder.getData()
+        retorfitData.enqueue(object : Callback<List<APIDataItem>?> {
+            override fun onResponse(
+                p0: Call<List<APIDataItem>?>,
+                p1: Response<List<APIDataItem>?>
+            ) {
+                val res = p1.body()!!
+                for (data in res){
+                    Log.d("API data: ", data.title)
+                }
+            }
+
+            override fun onFailure(p0: Call<List<APIDataItem>?>, p1: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {

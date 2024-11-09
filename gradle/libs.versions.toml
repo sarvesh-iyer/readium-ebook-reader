@@ -63,6 +63,7 @@ pdf-viewer = "2.8.2"
 picasso = "2.8"
 pspdfkit = "8.4.1"
 
+retrofit = "2.11.0"
 robolectric = "4.13"
 
 timber = "5.0.1"
@@ -108,6 +109,7 @@ androidx-webkit = { group = "androidx.webkit", name = "webkit", version.ref = "a
 
 assertj = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
 
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
 google-exoplayer-core = { group = "com.google.android.exoplayer", name = "exoplayer-core", version.ref = "google-exoplayer" }
 google-exoplayer-extension-media2 = { group = "com.google.android.exoplayer", name = "extension-media2", version.ref = "google-exoplayer" }
@@ -133,6 +135,7 @@ pdfium = { group = "com.github.barteksc", name = "pdfium-android", version.ref="
 picasso = { group = "com.squareup.picasso", name = "picasso", version.ref = "picasso" }
 pspdfkit = { group = "com.pspdfkit", name = "pspdfkit", version.ref ="pspdfkit" }
 
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 robolectric = { group = "org.robolectric", name = "robolectric", version.ref = "robolectric" }
 
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
